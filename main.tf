@@ -1,5 +1,5 @@
 
-#  ... only thing to change is below value of  VERSION 
+#  ... typical thing to change is below value of  VERSION to determine desired Ubuntu release
 #  ... this code does a lookup to display aws ami driven from this choice 
 
 variable "VERSION" {
@@ -16,6 +16,18 @@ variable "VERSION" {
 # ........  change aws region here as needed
 
 variable "aws_region" { default = "us-east-1" }
+# variable "aws_region" { default = "eu-east-1" }
+
+
+variable "ARCH" {
+  default = "amd64"
+  # default = "arm64"
+}
+
+
+
+# ...  rarely change anything below  ... 
+
 
 variable "FAMILY" {
   default = "ubuntu"
@@ -46,12 +58,7 @@ variable "SUITE" {
 
 
 
-variable "ARCH" {
-  default = "amd64"
-  # default = "arm64"
-}
-
-variable "ubuntu_map" {
+variable "ubuntu_map" {    #  not used in this incantation  ...  here to allow change question
 
   type = map(string)
 
@@ -63,7 +70,6 @@ variable "ubuntu_map" {
     "focal"   = "20.04"
     "bionic"  = "18.04"
     "xenial"  = "16.04"
-
   }
 }
 
@@ -116,7 +122,7 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"] # Canonical  this limits shows ami to ONLY those provided by this owner  Ubuntu is 099720109477
+  owners = ["099720109477"] # Canonical  this limits ami to ONLY those provided by this owner  Ubuntu is 099720109477
 }
 
 resource "aws_instance" "web" {
@@ -127,13 +133,4 @@ resource "aws_instance" "web" {
     Name = "show_aws_ami"
   }
 }
-
-output "image_id" {
-  value = data.aws_ami.ubuntu.id
-}
-
-output "ubuntu_server_name" {
-  value = data.aws_ami.ubuntu.name
-}
-
 
