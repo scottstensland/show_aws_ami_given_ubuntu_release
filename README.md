@@ -10,8 +10,9 @@ pick which    Ubuntu release   by editing file
 change variable  VERSION  in file  main.tf to pick desired Ubuntu release ... then issue
 
 
-tf init
-tf plan  
+    tf init
+
+    tf plan  
 
 
 above   tf plan    will generate output similar to below which shows latest ami based on criteria in main.tf :
@@ -21,5 +22,6 @@ above   tf plan    will generate output similar to below which shows latest ami 
     Changes to Outputs:
       + image_id           = "ami-07d9b9ddc6cd8dd30"
       + ubuntu_server_name = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240207.1"
+
 
 
